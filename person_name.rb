@@ -69,4 +69,7 @@ RSpec.describe Person do
             expect(person.initials).to eq('B L M')
         end
     end
+
+    
+
 end

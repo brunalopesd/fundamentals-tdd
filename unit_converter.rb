@@ -5,77 +5,62 @@ require "rspec/autorun"
 
 DimensionalMismatchError = Class.new(StandardError)
 
-Quantity = Struct.new(:amount, :unit)
 
 class UnitConverter
-    def initialize(initial_quantity, target_unit)
-        @initial_quantity = initial_quantity
+    def initialize(initial_amount, initial_unit, target_unit)
+        @initial_amount = initial_amount
+        @initial_unit = initial_unit
         @target_unit = target_unit
 
     end
 
     def convert
-        Quantity.new(@initial_quantity.amount * conversion_factor(from: @initial_quantity, to: @target_unit), @target_unit)
+        @initial_amount * conversion_factor(from: @initial_unit, to: @target_unit)
     end 
     
     private
 
     CONVERSION_FACTORS = {
-        liter: {
-            cup: 4.226775,
-            liter: 1,
-            pint: 2.11338
-        },
-        gram: {
-            gram: 1,
-            kilgram: 1000
+        cup: {
+            liter: 0.236588
         }
     }
 
     def conversion_factor(from:, to:)
-        dimension =  common_dimension(from, to)
-        if !dimension.nil?
-            CONVERSION_FACTORS[dimension][to] / CONVERSION_FACTORS[dimension][from]
+        if from == to 
+            1
         else
-            raise(DimensionalMismatchError, "Can't convert from #{from} to #{to}")
+            CONVERSION_FACTORS[from][to] || raise(DimensionalMismatchError, "Can't convert from #{from} to #{to}")
         end
     end
 
-    def common_dimension(from, to)
-        CONVERSION_FACTORS.find do |canonical_unit|
-            CONVERSION_FACTORS[canonical_unit].keys.include?(from) &&
-                CONVERSION_FACTORS[canonical_unit].keys.include?(to)
-        end
-    end
 end
 
 describe UnitConverter do
     describe "#convert"  do
         it "translates between objects of the same dimension " do
-            cups = Quantity.new(2, :cup)
-            converter = UnitConverter.new(cups,:liter)
+            converter = UnitConverter.new(2,:cup, :liter)
 
             result = converter.convert
 
-            expect(result.amount).to be_within(0.001).of(0.473)
-            expect(result.unit).to eq(:liter)
-        end
-
-        it "can convert between quantities of the same unit" do 
-            cups = Quantity.new(2, :cup)
-            converter = UnitConverter.new(cups, :cups)
-
-            result = converter.convert
-
-            expect(result.amount).to be_within(0.001).of(2)
-            expect(result.unit).to eq(:cup)
+            expect(result).to be_within(0.001).of(0.473)
+            # expect(result).to eq(:liter)
         end
 
         it "raises an error if the two quantities are of differing dimensions" do
-            cups = Quantity.new(2, :cup)
-            converter = UnitConverter.new(cups, :gram)
+            converter = UnitConverter.new(2, :cup, :gram)
             
-            expect{ converter.convert }.to raise_error(DimensionalMismatchError)  
+            expect{converter.convert}.to raise_error(DimensionalMismatchError)  
         end
+
+        it "can convert between quantities of the same unit" do 
+            converter = UnitConverter.new(:cup, :cup)
+
+            result = converter.convert
+
+            expect(result).to eq(:cup)
+
+        end 
     end 
 end 
+
