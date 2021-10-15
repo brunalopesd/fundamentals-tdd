@@ -6,6 +6,7 @@ require "rspec/autorun"
 class Calculator
     def add(a, b)
         a + b
+        #new comment
     end
 
     def factorial(n)
