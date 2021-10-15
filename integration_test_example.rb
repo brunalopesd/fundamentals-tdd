@@ -10,6 +10,7 @@ feature "user creates person" do
     click_button "Submmit"
 
     expect(page).to have_content ("Thanks") 
+    #####
 
   end
 end
