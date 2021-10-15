@@ -2,6 +2,7 @@ require "rspec/autorun"
 
 # UnitConverter.new.convert(2, :cup, :liter) # => 0.473
 # UnitConverter.new.convert(2, :cup, :gram) # => DimensionalMismatchError!!!
+#new line
 
 DimensionalMismatchError = Class.new(StandardError)
 
