@@ -4,8 +4,8 @@ require "rspec/autorun"
 # calc.add(5, 10) # => 15
 
 class Calculator
-    def add(a, b)
-        a + b
+    def add(number_a, number_b)
+        number_a + number_b
     end
 
     def subtract(a, b)
