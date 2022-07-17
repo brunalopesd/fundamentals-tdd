@@ -4,8 +4,8 @@ require "rspec/autorun"
 # calc.add(5, 10) # => 15
 
 class Calculator
-    def add(num_a, num_b)
-        num_a + num_b
+    def add(number_a, number_b)
+        number_a + number_b
     end
 
     def factorial(n)
