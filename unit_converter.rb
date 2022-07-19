@@ -45,7 +45,6 @@ describe UnitConverter do
             result = converter.convert
 
             expect(result).to be_within(0.001).of(0.473)
-            # expect(result).to eq(:liter)
         end
 
         it "raises an error if the two quantities are of differing dimensions" do
