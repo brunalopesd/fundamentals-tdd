@@ -19,4 +19,8 @@ class Calculator
             (1..n).reduce(:*)
         end
     end
+
+    def divide(a, b)
+        return a - b unless b == 0
+    end
 end
