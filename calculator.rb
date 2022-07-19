@@ -20,6 +20,10 @@ class Calculator
         a / b unless b == 0
         return "Cannot divide per 0"
 
+    def multiply(a, b)
+        a * b
+    end
+
     def factorial(n)
         if n == 0
             1
