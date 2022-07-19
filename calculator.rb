@@ -15,4 +15,8 @@ class Calculator
             (1..n).reduce(:*)
         end
     end
+
+    def multiply(a, b)
+        a * b
+    end
 end
