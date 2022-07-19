@@ -24,4 +24,11 @@ describe Calculator do
           expect(calc.factorial(5)).to eq(120)  
        end
   end
+
+  describe "#subtract" do
+    it "retunrs subtract of two numbers" do
+        calc = Calculator.new
+
+        expect(calc.subtract(2-1)).to  eq(1)
+    end
 end
