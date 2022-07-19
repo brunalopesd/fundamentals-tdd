@@ -12,6 +12,10 @@ class Calculator
         a - b
     end
 
+    def multiply(a, b)
+        a * b
+    end
+
     def factorial(n)
         if n == 0
             1
