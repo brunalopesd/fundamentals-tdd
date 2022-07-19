@@ -7,6 +7,10 @@ class Calculator
     def add(number_a, number_b)
         number_a + number_b
     end
+    
+    def multiply(a, b)
+        a * b
+    end
 
     def subtract(a, b)
         a - b
