@@ -37,6 +37,7 @@ class UnitConverter
 
 end
 
+#tests of class 
 describe UnitConverter do
     describe "#convert"  do
         it "translates between objects of the same dimension " do
